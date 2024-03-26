@@ -30,11 +30,10 @@ def solution(grid, x, y, d):
         return d
 
     count = 1
-
-    visited[x][y] = True
-
     turn_count = 0
+    visited[x][y] = True
     cur_x, cur_y = x, y
+
     while True:
         d = turn_left(d)
         dx, dy = delta[d]
