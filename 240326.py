@@ -38,18 +38,18 @@ def swap_node_in_pairs(head):
 
         prev.next = b
 
-        head = head.next
         prev = prev.next.next
+        head = head.next
 
     return root.next
 
 
 result = swap_node_in_pairs(ll)
-
 head = result
 while head:
     print(head.val)
     head = head.next
+
 
 graph = {
     1: [(2, 2), (1, 4)],
@@ -97,20 +97,18 @@ root.left.right = Node(5)
 
 
 def tree_bfs(root):
+    q = deque()
     visited = []
 
-    q = deque()
     q.append(root)
 
     while q:
         cur_node = q.popleft()
         visited.append(cur_node.value)
-
         if cur_node.left:
             q.append(cur_node.left)
         if cur_node.right:
             q.append(cur_node.right)
-
     return visited
 
 
@@ -143,14 +141,6 @@ graph = {
 graph_dfs_visited = []
 
 
-def graph_dfs(v):
-    graph_dfs_visited.append(v)
-    for x in graph[v]:
-        if x not in graph_dfs_visited:
-            graph_dfs(x)
-    return graph_dfs_visited
-
-
 def graph_bfs(v):
     q = deque()
     q.append(v)
@@ -158,28 +148,41 @@ def graph_bfs(v):
 
     while q:
         cur_v = q.popleft()
-
         for x in graph[cur_v]:
             if x not in visited:
                 q.append(x)
                 visited.append(x)
+
     return visited
 
 
-print(graph_dfs("E"))
+graph_dfs_visited = []
+
+
+def graph_dfs(v):
+    graph_dfs_visited.append(v)
+
+    for x in graph[v]:
+        if x not in graph_dfs_visited:
+            graph_dfs(x)
+    return graph_dfs_visited
+
+
 print(graph_bfs("A"))
+print(graph_dfs("A"))
+
 
 height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
 
 
-def trapping_rain_water(height):
+def trapping_water(height):
     left, right = 0, len(height) - 1
     left_max, right_max = height[left], height[right]
 
     volume = 0
     while left < right:
-        left_max = max(left_max, height[left])
-        right_max = max(right_max, height[right])
+        left_max = max(height[left], left_max)
+        right_max = max(height[right], right_max)
 
         if left_max <= right_max:
             volume += left_max - height[left]
@@ -191,4 +194,87 @@ def trapping_rain_water(height):
     return volume
 
 
-print(trapping_rain_water(height))
+print(trapping_water(height))
+
+grid = [[1, 1, 1, 1, 0], [1, 1, 0, 1, 0], [1, 1, 0, 1, 0], [0, 0, 0, 1, 1]]
+
+
+def number_of_islands(grid):
+    row = len(grid)
+    col = len(grid[0])
+
+    visited = [[False] * col for _ in range(row)]
+    delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+    count = 0
+
+    def bfs(x, y):
+        q = deque()
+        q.append((x, y))
+
+        while q:
+            cur_x, cur_y = q.popleft()
+            for dx, dy in delta:
+                next_x, next_y = cur_x + dx, cur_y + dy
+                if (
+                    next_x >= 0
+                    and next_x < row
+                    and next_y >= 0
+                    and next_y < col
+                    and visited[next_x][next_y] == False
+                    and grid[next_x][next_y] == 1
+                ):
+                    q.append((next_x, next_y))
+                    visited[next_x][next_y] = True
+
+    for i in range(row):
+        for j in range(col):
+            if visited[i][j] == False and grid[i][j] == 1:
+                bfs(i, j)
+                count += 1
+
+    return count
+
+
+print(number_of_islands(grid))
+
+grid = [
+    [0, 0, 0],
+    [1, 1, 0],
+    [1, 1, 1],
+]
+
+
+def shorted_path(grid):
+    row = len(grid)
+    col = len(grid[0])
+
+    visited = [[False] * col for _ in range(row)]
+
+    delta = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+
+    q = deque()
+    q.append((0, 0, 1))
+
+    while q:
+        cur_x, cur_y, cur_l = q.popleft()
+        if cur_x == row - 1 and cur_y == col - 1:
+            return cur_l
+
+        for dx, dy in delta:
+            next_x, next_y, next_l = cur_x + dx, cur_y + dy, cur_l + 1
+            if (
+                next_x >= 0
+                and next_x < row
+                and next_y >= 0
+                and next_y < col
+                and grid[next_x][next_y] == 0
+                and visited[next_x][next_y] == False
+            ):
+                q.append((next_x, next_y, next_l))
+                visited[next_x][next_y] = True
+
+    return -1
+
+
+print(shorted_path(grid))
