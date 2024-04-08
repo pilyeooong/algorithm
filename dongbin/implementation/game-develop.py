@@ -56,7 +56,8 @@ def solution(grid, x, y, d):
             turn_count += 1
 
         if turn_count == 4:
-            dx, dy = delta[go_back(d)]
+            back_delta = go_back(d)
+            dx, dy = delta[back_delta]
             next_x, next_y = cur_x + dx, cur_y + dy
             if (
                 next_x >= 0
