@@ -28,3 +28,20 @@ def solution2(l):
 
 solution(l)
 solution2(l)
+
+
+l = [15, 11, 4, 8, 5, 2, 4]
+
+
+def solution3(l):
+    dp = [1] * len(l)
+
+    for i in range(1, len(l)):
+        for j in range(i):
+            if l[i] < l[j]:
+                dp[i] = max(dp[i], dp[j] + 1)
+
+    return len(l) - max(dp)
+
+
+print(solution3(l))

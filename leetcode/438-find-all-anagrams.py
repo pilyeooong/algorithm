@@ -7,6 +7,7 @@ p = "abc"
 def solution(s, p):
     ans = []
     sp = Counter(p)
+    print(sp)
     for i in range(len(s) - len(p) + 1):
         sliced = s[i : i + len(p)]
 
