@@ -13,8 +13,6 @@ def solution(s):
                 temp += s[j]
         result = max(result, temp, key=len)
 
-    print(result)
-
     return len(result)
 
 
