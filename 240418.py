@@ -88,3 +88,30 @@ def quick_sort(l, start, end):
 
 array = [5, 7, 9, 0, 3, 1, 6, 2, 4, 8]
 print(quick_sort(array, 0, len(array) - 1))
+
+
+from collections import deque
+
+
+def bracket(s):
+    l = []
+    for x in s:
+        if x == "(":
+            l.append(")")
+        elif x == "[":
+            l.append("]")
+        elif x == "{":
+            l.append("}")
+        elif not l or l.pop() != x:
+            return False
+    return True
+
+
+result = bracket("()()()")
+print(result)
+
+result = bracket("([)]}")
+print(result)
+
+result = bracket("{()[]}")
+print(result)
