@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 # tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]
 
 tickets = [
@@ -10,36 +12,22 @@ tickets = [
 # graph = {'ICN': ['ATL', 'SFO'], 'SFO': ['ATL'], 'ATL': ['ICN', 'SFO']}
 
 
-# def solution(tickets):
-#     dic = {}
-#     for ticket in tickets:
-#         if ticket[0] not in dic:
-#             dic[ticket[0]] = [ticket[1]]
-#         else:
-#             dic[ticket[0]].append(ticket[1])
-#             dic[ticket[0]].sort()
+def solution(tickets):
+    dic = defaultdict(list)
+    for ticket in tickets:
+        dic[ticket[0]].append(ticket[1])
+    for i in dic:
+        dic[i].sort()
+    visited = []
 
-
-# print(solution(tickets))
-
-from collections import defaultdict
-
-
-def solution2(tickets):
-    graph = defaultdict(list)
-
-    for a, b in sorted(tickets, key=lambda x: x[1]):
-        graph[a].append(b)
-
-    route = []
-
-    def dfs(start):
-        while graph[start]:
-            dfs(graph[start].pop(0))
-        route.append(start)
+    def dfs(ticket):
+        while dic[ticket]:
+            dfs(dic[ticket].pop(0))
+        visited.append(ticket)
 
     dfs("ICN")
-    return route[::-1]
+
+    return visited[::-1]
 
 
-solution2(tickets)
+print(solution(tickets))

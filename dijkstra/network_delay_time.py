@@ -25,8 +25,11 @@ def network_delayed_time(times, n, k):
     return max(costs.values())
 
 
-times = [[2, 1, 2], [2, 3, 5], [2, 4, 1], [4, 3, 3]]
-n = 4
+# times = [[2, 1, 2], [2, 3, 5], [2, 4, 1], [4, 3, 3]]
+# n = 4
+# k = 2
+times = [[1, 2, 1], [2, 1, 3]]
+n = 2
 k = 2
 
 print(network_delayed_time(times, n, k))
