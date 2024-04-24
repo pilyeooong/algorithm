@@ -1,13 +1,20 @@
 def solution(number, k):
     answer = ""
 
-    l = list(number)
-    for _ in range(k):
-        minimum = min(l)
-        rm = l.index(minimum)
-        l.pop(rm)
+    stack = []
 
-    return answer.join(l)
+    for num in number:
+        if stack and k > 0:
+            while stack and stack[-1] < num and k > 0:
+                stack.pop()
+                k -= 1
+
+        stack.append(num)
+
+    answer = "".join(stack)
+    if k > 0:
+        answer = answer[:-k]
+    return answer
 
 
 # number = "1924"
