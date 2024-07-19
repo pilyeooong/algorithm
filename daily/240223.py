@@ -45,5 +45,6 @@ def tree_dfs(root):
     return tree_dfs_visited
 
 
+print('bfs,dfs')
 print(tree_bfs(root))
 print(tree_dfs(root))

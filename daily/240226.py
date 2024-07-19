@@ -185,6 +185,7 @@ def shortest_path(grid):
     return shortest_path
 
 
+print('path')
 print(shortest_path(grid))
 
 costs = [10, 15, 20, 17]
