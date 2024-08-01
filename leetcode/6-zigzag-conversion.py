@@ -1,7 +1,7 @@
 def convert(s, num_rows):
-    check = ['' for _ in range(num_rows)]
     if num_rows == 1 or len(s) == 1:
         return s
+    check = ['' for _ in range(num_rows)]
 
     cal = -1
     idx = 0
