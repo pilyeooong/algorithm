@@ -50,6 +50,8 @@ def check_perfect_sentence(sentence):
 
 ans = check_perfect_sentence('Hello World') 
 print(ans)
+ans = check_perfect_sentence('abcdefghijklmnopqrstuvwxyz') 
+print(ans)
 
 v = [
     [1, 1, 1, 1, 0],
